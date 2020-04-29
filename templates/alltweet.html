@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'top.css' %}">
+{% endblock custom_css %}
+
+{% block main_content %}
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <h3 class="masthead-brand">みんなの投稿</h3>
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link active" href="{% url 'mypage' %}">マイページ</a>
+        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+      </nav>
+    </div>
+  </header>
+    <main role="main" class="inner cover">
+    {% if objects_list %}
+    {% for item in objects_list %}
+
+      <p></p>
+      <br>
+      <br>
+    <p class="lead"><a href="{% url 'other' item.post_name %}">{{ item.post_name }}</a>さんの投稿</p>
+    <p class="lead">{{ item.context }}</p>
+    <div>{{ item.date }}</div>
+    <p class="lead">
+
+    {% endfor %}
+    {% endif %}
+      </p>
+    </main>
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    </div>
+  </footer>
+</div>
+{% endblock main_content %}

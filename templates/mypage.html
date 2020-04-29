@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'top.css' %}">
+{% endblock custom_css %}
+
+{% block main_content %}
+
+
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <h3 class="masthead-brand">{{ username }}さんのマイページ</h3>
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link active" href="{% url 'alltweet' %}">みんなの投稿</a>
+        <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+      </nav>
+    </div>
+  </header>
+
+    <main role="main" class="inner cover">
+    {% if objects_list %}
+    {% for item in objects_list %}
+
+      <p></p>
+      <br>
+      <br>
+    <p class="lead">{{ item.context }}</p>
+    <div>{{ item.date }}</div>
+    <p class="lead">
+    <a href="{% url 'delete' item.pk %}" class="btn  btn-secondary">削除</a>
+
+    {% endfor %}
+    {% endif %}
+      </p>
+    </main>
+  <div class="container">
+    <div class="form-group">
+      <form action="" method="POST">{% csrf_token %}
+        <textarea class="form-control"  name="context"></textarea>
+        <input type="submit" value="投稿" class="btn  btn-secondary">
+      </form>
+    </div>
+    </div>
+</div>
+{% endblock main_content %}
